@@ -9,7 +9,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 const Mixed = Schema.Types.Mixed
-const MONGO = INDEX.CONFIG.MONGO
+const dispatcher = INDEX.dispatcher
 
 // Connect to Mongo
 mongoose.connect(MONGO.URL)
