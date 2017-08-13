@@ -4,6 +4,7 @@
   "description": "Demo app for using Crossbar.io with Node.js",
   "main": "node/hello.js",
   "scripts": {
+    "test": "./start_crossbar.sh start && cd ",
     "build": "./install_crossbar.sh",
     "start": "./start_crossbar.sh"
   },
@@ -17,6 +18,7 @@
   "author": "Tavendo GmbH",
   "license": "Apache 2.0",
   "dependencies": {
+    "jest": "^20.0.4",
     "lodash": "^4.17.4",
     "mongoose": "^4.11.6",
     "wampy": "^6.0.0",
