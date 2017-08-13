@@ -1,0 +1,23 @@
+{
+  "name": "hello_nodejs",
+  "version": "1.0.0",
+  "description": "Demo app for using Crossbar.io with Node.js",
+  "main": "node/hello.js",
+  "scripts": {
+    "build": "./install_crossbar.sh",
+    "start": "./start_crossbar.sh"
+  },
+  "keywords": [
+    "crossbario",
+    "wamp",
+    "api",
+    "mongoose",
+    "websocket"
+  ],
+  "author": "Tavendo GmbH",
+  "license": "Apache 2.0",
+  "dependencies": {
+    "mongoose": "^4.11.6",
+    "wampy": "^6.0.0"
+  }
+}
