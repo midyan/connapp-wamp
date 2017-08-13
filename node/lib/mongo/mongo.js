@@ -1,11 +1,18 @@
+// Import Modules
+const INDEX = require('../../index.js')
+
+// Import Packages
 const _ = require('lodash')
 const mongoose = require('mongoose')
+
+// Define helper variables
 const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 const Mixed = Schema.Types.Mixed
-const mongoAddress = 'mongodb://localhost'
-mongoose.connect(mongoAddress)
+const MONGO = INDEX.CONFIG.MONGO
 
+// Connect to Mongo
+mongoose.connect(MONGO.URL)
 
 //Models
 const models = {
@@ -51,13 +58,19 @@ const models = {
   // }
 }
 
+// Export functon, to compile all models
 module.exports = () => {
 
+  // Map raw schemas to compiled modules
   const compiled = _.mapValues(models, (value, key) => {
+    // Get schema object
     const model = value()
+
+    // Returns compiled module
     return mongoose.model(model.modelName, model.schema)
   })
 
+  // Return Object with compiled odels and mongoose connection object
   return {
     models: compiled,
     mongoose: mongoose
