@@ -1,10 +1,8 @@
-// Modules Imports
-const CONFIG = require('./config/config.js')
-const DISPATCHER = require('./lib/dispatcher/dispatcher.js')
-const MONGO = require('./lib/mongo/mongo.js')()
-
 // Packages imports
 const Wampy = require('wampy').Wampy
+
+// Modules Imports
+const CONFIG = require('./config/config.js')
 
 // Exports Config object
 module.exports.CONFIG = CONFIG
@@ -19,7 +17,7 @@ const wsOptions = {
 module.exports.connection = new Wampy(CONFIG.WEBSOCKET.URL, wsOptions)
 
 // Exports disptcher module
-module.exports.dispatcher = DISPATCHER
+module.exports.dispatcher = require('./lib/dispatcher/dispatcher.js')
 
 // Exports connection object
-module.exports.mongo = MONGO
+module.exports.mongo = require('./lib/mongo/mongo.js')()
