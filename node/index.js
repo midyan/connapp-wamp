@@ -15,11 +15,11 @@ const wsOptions = {
   realm: CONFIG.WEBSOCKET.REALM
 }
 
-//  Exports connection object
+// Exports connection object
 module.exports.connection = new Wampy(CONFIG.WEBSOCKET.URL, wsOptions)
 
-//  Exports disptcher module
+// Exports disptcher module
 module.exports.dispatcher = DISPATCHER
 
-//  Exports connection object
+// Exports connection object
 module.exports.mongo = MONGO
