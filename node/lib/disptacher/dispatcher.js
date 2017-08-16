@@ -16,6 +16,10 @@ const ws = INDEX.connection
  */
 const dispatchFetch = (model, type = 'update', _id, data = {}) => {
   // Builds event string
+  console.log(
+    'TYPE OF OPERATION IS',
+    type
+  )
   const event = `conapp.${model.toLowerCase()}.fetch.${data._id.toString()}`
   const eventList = `conapp.${model.toLowerCase()}.fetch.${type.toLowerCase()}`
 
