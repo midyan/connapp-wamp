@@ -17,10 +17,10 @@ const wsOptions = {
 module.exports.connection = new Wampy(CONFIG.WEBSOCKET.URL, wsOptions)
 
 // Exports disptcher module
-module.exports.dispatcher = require('./lib/dispatcher/dispatcher.js')
+module.exports.dispatcher = require('./disptacher/dispatcher.js')
 
 // Exports connection object
-module.exports.mongo = require('./lib/mongo/mongo.js')()
+module.exports.mongo = require('./mongo/mongo.js')()
 
 // Exports disptcher module
-module.exports.watcher = require('./lib/watcher/watcher.js')
+module.exports.watcher = require('./watcher/watcher.js')
