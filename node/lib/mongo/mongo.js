@@ -42,10 +42,8 @@ const models = {
       // Defines arguments for dispatch function
       const type = this.isNew? 'insert': 'update'
             _id = this._id.toString(),
-            data = _.cloneDeep(this.doc)
-      console.log('--------------------------')
-      console.log(this)
-      console.log('--------------------------')
+            data = _.cloneDeep(this)
+            
       // Dispatches for realtimeUpdate
       dispatcher.dispatchFetch(modelName, type, _id, data)
 
