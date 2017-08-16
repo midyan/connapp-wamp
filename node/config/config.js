@@ -18,7 +18,7 @@ const MONGO = {
 
 // Websocket/WAMP config object
 const WEBSOCKET = {
-  URL: 'ws://localhost:9000/ws',
+  URL: 'ws://localhost:8080/ws',
   REALM: 'realm1',
   CLIENT: w3cws
 }
