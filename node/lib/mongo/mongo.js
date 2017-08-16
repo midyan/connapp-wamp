@@ -39,16 +39,11 @@ const models = {
     //Defines Pre-Save hook
     dataSchema.pre('save', function(next){
       // Defines arguments for dispatch function
-      const type = this.isNew? 'new' : 'update',
-            _id = this._id.toString(),
+      const _id = this._id.toString(),
             data = _.cloneDeep(this.doc)
 
-      // Boolean variable to decide if dispatcher should be called
-      const canCall = type && _id && !_.isEmpty(data) && modelName
-
-
       // Dispatches for realtimeUpdate
-      if (canCall) dispatcher.dispatchRealtime(type, modelName, _id, data)
+      if (canCall) dispatcher.dispatchFetch(modelName, _id, data)
 
       // Call next on stack
       next()
