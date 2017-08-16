@@ -21,3 +21,6 @@ module.exports.dispatcher = require('./lib/dispatcher/dispatcher.js')
 
 // Exports connection object
 module.exports.mongo = require('./lib/mongo/mongo.js')()
+
+// Exports disptcher module
+module.exports.watcher = require('./lib/watcher/watcher.js')
