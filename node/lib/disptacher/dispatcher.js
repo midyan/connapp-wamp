@@ -14,22 +14,19 @@ const ws = INDEX.connection
  * @param  {String} _id       ID of the documento to perform publish
  * @param  {Object} [data={}] Updated data to send
  */
-const dispatchRealtime = (type, model, _id, data = {}) => {
+const dispatchFetch = (model, _id, data = {}) => {
   // Builds event string
-  const event = _.compact(['connapp', model, type, _id]).join('.')
-
-  // Adds extra info to the data, so the App can update the right document
-  const data.meta = {
-    type: type,
-    model: model,
-    _id: _id
-  }
+  const event = `conapp.${model}.fetch.${data._id.toString()}`
 
   // Publish the event
-  connection.publish(event, data)
+  ws.publish(
+    event,
+    [{ model }],
+    data
+  )
 }
 
 // Exports
 module.exports = {
-  dispatcher: dispatcher
+  dispatchFetch: dispatchFetch
 }
