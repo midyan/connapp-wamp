@@ -1,5 +1,5 @@
 {
-  "name": "hello_nodejs",
+  "name": "conapp-wamp",
   "version": "1.0.0",
   "description": "Demo app for using Crossbar.io with Node.js",
   "main": "node/hello.js",
@@ -15,8 +15,8 @@
     "mongoose",
     "websocket"
   ],
-  "author": "Tavendo GmbH",
-  "license": "Apache 2.0",
+  "author": "Yan Nunes",
+  "license": "MIT",
   "dependencies": {
     "jest": "^20.0.4",
     "lodash": "^4.17.4",
