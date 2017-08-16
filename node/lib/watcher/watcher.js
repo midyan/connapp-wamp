@@ -28,7 +28,7 @@ const watchUpdates = () => {
         return res.save()
       })
       .then(res => {
-        ws.publish(`conapp.${model}.fetch.${red._id.toString()}`, args, res)
+        console.log(res)
       })
       .catch(err => console.log(err))
     })
@@ -56,10 +56,23 @@ const watchersObj = {
   watchInserts: watchInserts
 }
 
-const runAllWatchers = () => watchersObj.forEach(watcher => watcher())
+const runAllWatchers = () => _.mapValues(
+  watchersObj,
+  watcher => {
+    var status = true
+
+    try {
+      watcher()
+    } catch(e) {
+      status = e
+    }
+
+    return status
+  }
+)
 
 // Exports
 module.exports = {
   list: watchersObj,
-  runAllWatchers: runAllWatchers
+  watchersStatus: runAllWatchers()
 }
