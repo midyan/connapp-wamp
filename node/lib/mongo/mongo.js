@@ -19,10 +19,10 @@ mongoose.connect(MONGO.URL)
 const models = {
   FakeNews: () => {
     // Defines collection name
-    const collectionName = 'fakeNews'
+    const collectionName = 'fakenews'
 
     // Defines model name
-    const modelName = 'FakeNews'
+    const modelName = 'fakenews'
 
     // Defines model for the schema
     const model =  {
@@ -40,11 +40,12 @@ const models = {
     //Defines Pre-Save hook
     dataSchema.pre('save', function(next){
       // Defines arguments for dispatch function
-      const _id = this._id.toString(),
+      const type = this.isNew? 'insert': 'update'
+            _id = this._id.toString(),
             data = _.cloneDeep(this.doc)
 
       // Dispatches for realtimeUpdate
-      if (canCall) dispatcher.dispatchFetch(modelName, _id, data)
+      dispatcher.dispatchFetch(modelName, type, _id, data)
 
       // Call next on stack
       next()
