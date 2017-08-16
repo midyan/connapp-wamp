@@ -10,6 +10,7 @@ const Schema = mongoose.Schema
 const ObjectId = Schema.Types.ObjectId
 const Mixed = Schema.Types.Mixed
 const dispatcher = INDEX.dispatcher
+const MONGO = INDEX.CONFIG.MONGO
 
 // Connect to Mongo
 mongoose.connect(MONGO.URL)
