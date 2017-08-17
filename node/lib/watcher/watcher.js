@@ -58,9 +58,10 @@ const watchSync = () => {
   console.log('Starting watch for sync routes')
   for (var model in mongo.models) {
     console.log('sync for '+ model)
-    console.log(`Subscribing for conapp.${model.toLowerCase()}.sync`)
-    ws.subscribe(`conapp.${model.toLowerCase()}.sync`, function() {
-      console.log(`CALLED - conapp.${model.toLowerCase()}.sync`)
+    const uri = `conapp.${model.toLowerCase()}.sync`
+    console.log(`Subscribing for ${uri}`)
+    ws.subscribe(uri, function() {
+      console.log(`CALLED - ${uri}`)
       mongo.models[model]
         .find({}).exec()
         .then(data => {
