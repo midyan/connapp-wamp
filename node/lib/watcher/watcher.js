@@ -56,10 +56,16 @@ const watchInserts = () => {
  */
 const watchSync = () => {
   for (var model in mongo.models) {
-    ws.subscribe(`conapp.${model}.fetch.sync`, function() {
+    ws.subscribe(`conapp.fakenews.sync`, function() {
+      console.log(`CALLED - conapp.${model}.sync`)
       mongo.models[model]
         .find({}).exec()
-        .then(data => ws.publish(`conapp.${model}.sync`, data))
+        .then(data => {
+		console.log('----------------------------')
+		console.log(data)
+		ws.publish(`conapp.${model}.fetch.sync`, data)
+		
+	})
         .catch(err => console.log(err))
     })
   }
