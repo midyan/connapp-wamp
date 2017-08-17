@@ -18,7 +18,7 @@ mongoose.connect(MONGO.URL)
 //Models
 const models = {
   fakenews: () => {
-    // Defines collection name
+    // Defines collection namem
     const collectionName = 'fakenews'
 
     // Defines model name
