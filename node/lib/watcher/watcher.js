@@ -51,9 +51,24 @@ const watchInserts = () => {
   }
 }
 
+/**
+ * Function to watch for inserts on all collections
+ */
+const watchSync = () => {
+  for (var model in mongo.models) {
+    ws.subscribe(`conapp.${model}.fetch.sync`, function() {
+      mongo.models[model]
+        .find({}).exec()
+        .then(data => ws.publish(`conapp.${model}.sync`, data))
+        .catch(err => console.log(err))
+    })
+  }
+}
+
 const watchersObj = {
   watchUpdates: watchUpdates,
-  watchInserts: watchInserts
+  watchInserts: watchInserts,
+  watchSync: watchSync
 }
 
 const runAllWatchers = () => _.mapValues(
