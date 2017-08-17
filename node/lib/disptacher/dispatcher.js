@@ -33,7 +33,7 @@ const dispatchFetch = (model, type = 'update', _id, data = {}) => {
   // Publish the event
   ws.publish(
     eventList,
-    [{data}]
+    [{model, data}]
   )
 }
 
