@@ -55,17 +55,19 @@ const watchInserts = () => {
  * Function to watch for inserts on all collections
  */
 const watchSync = () => {
+  console.log('Starting watch for sync routes')
   for (var model in mongo.models) {
-    ws.subscribe(`conapp.fakenews.sync`, function() {
+    console.log('sync for '+ model)
+    console.log(`Subscribing for conapp.${model}.sync`)
+    ws.subscribe(`conapp.${model}.sync`, function() {
       console.log(`CALLED - conapp.${model}.sync`)
       mongo.models[model]
         .find({}).exec()
         .then(data => {
-		console.log('----------------------------')
-		console.log(data)
-		ws.publish(`conapp.${model}.fetch.sync`, data)
-		
-	})
+          console.log('Mongo consulted')
+          console.log(data)
+          ws.publish(`conapp.${model}.fetch.sync`, data)
+	       })
         .catch(err => console.log(err))
     })
   }
