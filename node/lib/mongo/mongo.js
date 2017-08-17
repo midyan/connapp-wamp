@@ -17,7 +17,7 @@ mongoose.connect(MONGO.URL)
 
 //Models
 const models = {
-  FakeNews: () => {
+  fakenews: () => {
     // Defines collection name
     const collectionName = 'fakenews'
 
@@ -46,7 +46,7 @@ const models = {
 
       // Dispatches for realtimeUpdate
       dispatcher.dispatchFetch(modelName, type, _id, data)
-      
+
       // Call next on stack
       next()
     })

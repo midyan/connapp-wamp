@@ -14,7 +14,7 @@ const mongo = INDEX.mongo
  */
 const watchUpdates = () => {
   for (var model in mongo.models) {
-    ws.subscribe(`conapp.${model}.update`, function(data) {
+    ws.subscribe(`conapp.${model.toLowerCase()}.update`, function(data) {
       mongo.models[model]
       .findOne({_id: item._id}).exec()
       .then(res => {
@@ -40,7 +40,7 @@ const watchUpdates = () => {
  */
 const watchInserts = () => {
   for (var model in mongo.models) {
-    ws.subscribe(`conapp.${model}.insert`, function(data) {
+    ws.subscribe(`conapp.${model.toLowerCase()}.insert`, function(data) {
       const doc = new mongo.models[model](data)
       doc.save()
         .then(res => {
@@ -58,15 +58,15 @@ const watchSync = () => {
   console.log('Starting watch for sync routes')
   for (var model in mongo.models) {
     console.log('sync for '+ model)
-    console.log(`Subscribing for conapp.${model}.sync`)
-    ws.subscribe(`conapp.${model}.sync`, function() {
-      console.log(`CALLED - conapp.${model}.sync`)
+    console.log(`Subscribing for conapp.${model.toLowerCase()}.sync`)
+    ws.subscribe(`conapp.${model.toLowerCase()}.sync`, function() {
+      console.log(`CALLED - conapp.${model.toLowerCase()}.sync`)
       mongo.models[model]
         .find({}).exec()
         .then(data => {
           console.log('Mongo consulted')
           console.log(data)
-          ws.publish(`conapp.${model}.fetch.sync`, data)
+          ws.publish(`conapp.${model.toLowerCase()}.fetch.sync`, data)
 	       })
         .catch(err => console.log(err))
     })
