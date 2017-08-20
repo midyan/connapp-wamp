@@ -44,6 +44,6 @@ const updateDocumentToApp = (model, _id, data = {}) => {
 
 // Exports
 module.exports = {
-  insertToApp: insertToApp.
+  insertToApp: insertToApp,
   updateDocumentToApp: updateDocumentToApp
 }
