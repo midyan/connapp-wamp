@@ -8,21 +8,25 @@ const merge = require('merge')
 // Define helper variables
 const ws = INDEX.connection
 const mongo = INDEX.mongo
+const dispatcher = INDEX.dispatcher
 
 /**
  * Function to watch for updates on all collections
  */
 const watchUpdates = () => {
   for (var model in mongo.models) {
-    ws.subscribe(`connapp.${model.toLowerCase()}.update`, function(data) {
+    ws.subscribe(`connapp.server.${model.toLowerCase()}.update`, function(data) {
       mongo.models[model]
-      .findOne({_id: item._id}).exec()
+      .findOne({_id: data._id}).exec()
       .then(res => {
         // deletes save so it won't conflict on merging
         delete res.save
 
         // merges with new data
         merge(res, data)
+
+        // Makes sure this is treated as an update by the post save hook
+        res.isNew = false
 
         // saves Updated item
         return res.save()
@@ -40,8 +44,12 @@ const watchUpdates = () => {
  */
 const watchInserts = () => {
   for (var model in mongo.models) {
-    ws.subscribe(`connapp.${model.toLowerCase()}.insert`, function(data) {
-      const doc = new mongo.models[model](data)
+    ws.subscribe(`connapp.server.${model.toLowerCase()}.insert`, function(data) {
+      let doc = new mongo.models[model](data)
+
+      // Make sure this is treated as new by the post-save hook
+      doc.isNew = true
+
       doc.save()
         .then(res => {
           console.log(res)
@@ -55,20 +63,26 @@ const watchInserts = () => {
  * Function to watch for inserts on all collections
  */
 const watchSync = () => {
-  console.log('Starting watch for sync routes')
   for (var model in mongo.models) {
-    console.log('sync for '+ model)
-    const uri = `connapp.${model.toLowerCase()}.sync`
-    console.log(`Subscribing for ${uri}`)
-    ws.subscribe(uri, function() {
-      console.log(`CALLED - ${uri}`)
+    const uri = `connapp.server.${model.toLowerCase()}.fetch`
+    ws.subscribe(uri, (ids = []) => {
       mongo.models[model]
         .find({}).exec()
         .then(data => {
-          console.log('Mongo consulted')
-          console.log(data)
-          ws.publish(`connapp.${model.toLowerCase()}.fetch.sync`, data)
-	       })
+          // If nothing is found, does nothing
+          if (!data.length) return true
+
+          // Loops through the found data and dispatch route accordingly
+          data.forEach(item => {
+            const _id = item._id.toString()
+
+            if ( ids.indexOf(_id) == -1 ) {
+              dispatcher.insertToApp(model, item)
+            } else {
+              dispatcher.updateDocumentToApp(model, _id, item)
+            }
+          })
+	      })
         .catch(err => console.log(err))
     })
   }
