@@ -25,7 +25,6 @@ const insertToApp = (model, data = {}) => {
   )
 
   console.log(event + ' was published')
-
 }
 
 // FUnction to tell the App to update local documento o model
@@ -45,5 +44,6 @@ const updateDocumentToApp = (model, _id, data = {}) => {
 
 // Exports
 module.exports = {
-  insertToApp: insertToApp
+  insertToApp: insertToApp.
+  updateDocumentToApp: updateDocumentToApp
 }
