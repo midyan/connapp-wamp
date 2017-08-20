@@ -8,7 +8,7 @@ const fakenews = {
 var mongo = INDEX.mongo
 
 const CNN = new mongo.models.fakenews(fakenews)
-
+CNN.isNew = true
 CNN.save()
   .then(res => {
     console.log(res)
