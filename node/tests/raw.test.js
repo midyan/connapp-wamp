@@ -7,7 +7,7 @@ const fakenews = {
 
 var mongo = INDEX.mongo
 
-const CNN = new mongo.models.FakeNews(fakenews)
+const CNN = new mongo.models.fakenews(fakenews)
 
 CNN.save()
   .then(res => {
