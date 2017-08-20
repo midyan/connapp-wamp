@@ -38,7 +38,7 @@ const models = {
     const dataSchema = mongoose.Schema(model, {collection: collectionName})
 
     //Defines Pre-Save hook
-    dataSchema.post('save', function(){
+    dataSchema.pre('save', function(next){
       // Defines arguments for dispatch function
       const _id = this._id.toString(),
             data = _.cloneDeep(this)
@@ -49,6 +49,8 @@ const models = {
       } else {
         dispatcher.updateDocumentToApp(modelName, _id, data)
       }
+
+      next()
     })
 
     //return Schema and Model Name
