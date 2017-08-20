@@ -14,7 +14,7 @@ const mongo = INDEX.mongo
  */
 const watchUpdates = () => {
   for (var model in mongo.models) {
-    ws.subscribe(`conapp.${model.toLowerCase()}.update`, function(data) {
+    ws.subscribe(`connapp.${model.toLowerCase()}.update`, function(data) {
       mongo.models[model]
       .findOne({_id: item._id}).exec()
       .then(res => {
@@ -40,7 +40,7 @@ const watchUpdates = () => {
  */
 const watchInserts = () => {
   for (var model in mongo.models) {
-    ws.subscribe(`conapp.${model.toLowerCase()}.insert`, function(data) {
+    ws.subscribe(`connapp.${model.toLowerCase()}.insert`, function(data) {
       const doc = new mongo.models[model](data)
       doc.save()
         .then(res => {
@@ -58,7 +58,7 @@ const watchSync = () => {
   console.log('Starting watch for sync routes')
   for (var model in mongo.models) {
     console.log('sync for '+ model)
-    const uri = `conapp.${model.toLowerCase()}.sync`
+    const uri = `connapp.${model.toLowerCase()}.sync`
     console.log(`Subscribing for ${uri}`)
     ws.subscribe(uri, function() {
       console.log(`CALLED - ${uri}`)
@@ -67,7 +67,7 @@ const watchSync = () => {
         .then(data => {
           console.log('Mongo consulted')
           console.log(data)
-          ws.publish(`conapp.${model.toLowerCase()}.fetch.sync`, data)
+          ws.publish(`connapp.${model.toLowerCase()}.fetch.sync`, data)
 	       })
         .catch(err => console.log(err))
     })

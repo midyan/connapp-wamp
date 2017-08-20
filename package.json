@@ -1,5 +1,5 @@
 {
-  "name": "conapp-wamp",
+  "name": "connapp-wamp",
   "version": "1.0.0",
   "description": "Demo app for using Crossbar.io with Node.js",
   "main": "node/hello.js",
