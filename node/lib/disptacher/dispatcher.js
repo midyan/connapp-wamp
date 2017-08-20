@@ -14,30 +14,36 @@ const ws = INDEX.connection
  * @param  {String} _id       ID of the documento to perform publish
  * @param  {Object} [data={}] Updated data to send
  */
-const dispatchFetch = (model, type = 'update', _id, data = {}) => {
+const insertToApp = (model, data = {}) => {
   // Builds event string
-  const event = `conapp.${model.toLowerCase()}.fetch.${data._id.toString()}`
-  const eventList = `conapp.${model.toLowerCase()}.fetch.${type.toLowerCase()}`
-
-  console.log(
-    event,
-    eventList
-  )
+  const event = `connapp.app.${model.toLowerCase()}.insert`
 
   // Publish the event
   ws.publish(
     event,
-    [{model, data}],
+    [data]
   )
+
+  console.log(event + ' was published')
+
+}
+
+// FUnction to tell the App to update local documento o model
+const updateDocumentToApp = (model, _id, data = {}) => {
+  // Builds event string
+  const event = `connapp.app.${model.toLowerCase()}.update.${_id}`
 
   // Publish the event
   ws.publish(
-    eventList,
-    [{model, data}]
+    event,
+    [data]
   )
+
+  console.log(event + ' was published')
+
 }
 
 // Exports
 module.exports = {
-  dispatchFetch: dispatchFetch
+  insertToApp: insertToApp
 }

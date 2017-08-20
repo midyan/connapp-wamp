@@ -38,14 +38,17 @@ const models = {
     const dataSchema = mongoose.Schema(model, {collection: collectionName})
 
     //Defines Pre-Save hook
-    dataSchema.pre('save', function(next){
+    dataSchema.post('save', function(next){
       // Defines arguments for dispatch function
-      const type = this.isNew? 'insert': 'update'
-            _id = this._id.toString(),
+      const _id = this._id.toString(),
             data = _.cloneDeep(this)
 
       // Dispatches for realtimeUpdate
-      dispatcher.dispatchFetch(modelName, type, _id, data)
+      if (this.isNew) {
+        dispatcher.insertToApp(modelName, data)
+      } else {
+        dispatcher.updateDocumentToApp(modelName, _id, data)
+      }
 
       // Call next on stack
       next()
