@@ -42,7 +42,7 @@ const models = {
       // Defines arguments for dispatch function
       const _id = this._id.toString(),
             data = _.cloneDeep(this)
-
+      console.log(this)
       // Dispatches for realtimeUpdate
       if (this.isNew) {
         dispatcher.insertToApp(modelName, data)
