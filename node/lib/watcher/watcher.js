@@ -72,14 +72,13 @@ const watchSync = () => {
       mongo.models[model]
         .find({}).exec()
         .then(data => {
-          console.log('data found: ' + data)
           // If nothing is found, does nothing
           if (!data.length) return true
-          console.log('is array? ' + Array.isArray(ids))
+
+          console.log(ids)
           // Loops through the found data and dispatch route accordingly
           data.forEach(item => {
             const _id = item._id.toString()
-
             if ( ids.indexOf(_id) == -1 ) {
               console.log('sent to insert '+ item)
               dispatcher.insertToApp(model, item)
