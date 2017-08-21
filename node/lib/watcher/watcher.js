@@ -66,9 +66,11 @@ const watchSync = () => {
   for (var model in mongo.models) {
     const uri = `connapp.server.${model.toLowerCase()}.fetch`
     ws.subscribe(uri, (ids = []) => {
+      console.log('Fetch was triggered')
       mongo.models[model]
         .find({}).exec()
         .then(data => {
+          console.log('data found: ' + data)
           // If nothing is found, does nothing
           if (!data.length) return true
 
@@ -77,8 +79,10 @@ const watchSync = () => {
             const _id = item._id.toString()
 
             if ( ids.indexOf(_id) == -1 ) {
+              console.log('sent to insert '+ item)
               dispatcher.insertToApp(model, item)
             } else {
+              console.log('sent to update '+ item)
               dispatcher.updateDocumentToApp(model, _id, item)
             }
           })
