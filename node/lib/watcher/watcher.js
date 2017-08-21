@@ -68,7 +68,9 @@ const watchSync = () => {
     console.log(uri)
     ws.subscribe(uri, (args) => {
       console.log(args)
-      const ids = (args.argsDict || {}).data || []
+      const sentData = (((args.argsDict || {}).data || [])[0] || )
+      const ids = sentData.argsList
+      
       console.log('Fetch was triggered')
       mongo.models[model]
         .find({}).exec()
