@@ -66,9 +66,8 @@ const watchSync = () => {
   for (var model in mongo.models) {
     const uri = `connapp.server.${model.toLowerCase()}.fetch`
     console.log(uri)
-    ws.subscribe(uri, (args) => {
-      ids = args.argsList[0].argsList
-      console.log(ids)
+    ws.subscribe(uri, (args1, args2) => {
+      console.log(args1, args2)
       console.log('Fetch was triggered')
       mongo.models[model]
         .find({}).exec()
