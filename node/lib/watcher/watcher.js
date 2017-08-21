@@ -67,7 +67,8 @@ const watchSync = () => {
     const uri = `connapp.server.${model.toLowerCase()}.fetch`
     console.log(uri)
     ws.subscribe(uri, (args) => {
-      console.log(args)
+      ids = args.argsList[0].argsList
+      console.log(ids)
       console.log('Fetch was triggered')
       mongo.models[model]
         .find({}).exec()
@@ -75,12 +76,12 @@ const watchSync = () => {
           console.log('data found: ' + data)
           // If nothing is found, does nothing
           if (!data.length) return true
-          console.log('is array? ' + Array.isArray(args))
+          console.log('is array? ' + Array.isArray(ids))
           // Loops through the found data and dispatch route accordingly
           data.forEach(item => {
             const _id = item._id.toString()
 
-            if ( args.indexOf(_id) == -1 ) {
+            if ( ids.indexOf(_id) == -1 ) {
               console.log('sent to insert '+ item)
               dispatcher.insertToApp(model, item)
             } else {
