@@ -74,7 +74,7 @@ const watchSync = () => {
           console.log('data found: ' + data)
           // If nothing is found, does nothing
           if (!data.length) return true
-          console.log(typeof ids)
+          console.log('is array? ' + Array.isArray(ids))
           // Loops through the found data and dispatch route accordingly
           data.forEach(item => {
             const _id = item._id.toString()
