@@ -66,7 +66,7 @@ const watchSync = () => {
   for (var model in mongo.models) {
     const uri = `connapp.server.${model.toLowerCase()}.fetch`
     console.log(uri)
-    ws.subscribe(uri, (ids = []) => {
+    ws.subscribe(uri, (ids) => {
       console.log('Fetch was triggered')
       mongo.models[model]
         .find({}).exec()
@@ -74,7 +74,7 @@ const watchSync = () => {
           console.log('data found: ' + data)
           // If nothing is found, does nothing
           if (!data.length) return true
-
+          console.log(typeof ids)
           // Loops through the found data and dispatch route accordingly
           data.forEach(item => {
             const _id = item._id.toString()
