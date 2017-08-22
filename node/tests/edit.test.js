@@ -21,6 +21,7 @@ const query = {
 
 mongo.models.fakenews.findOne(query)
   .then(res => {
+    console.log(res)
     res.title = 'O Título foi editado em ' + timestamp
     return res.save().exec()
   })
