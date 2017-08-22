@@ -23,7 +23,7 @@ mongo.models.fakenews.findOne(query)
   .then(res => {
     console.log(res)
     res.title = 'O Título foi editado em ' + timestamp
-    return res.save().exec()
+    return res.save()
   })
   .then(res => console.log('Notícia foi editada com sucesso'))
   .catch(e => console.log(e))
