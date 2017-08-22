@@ -18,7 +18,7 @@ const hours = [hour, minute, seconds].join(':')
 const timestamp = dateString + ' ' + hours
 
 const query = {
-  _id: '599c183b21717849249e5bf7'
+  _id: '599c17c7064bce48f6b71bc5'
 }
 
 mongo.models.fakenews.findOne(query)
