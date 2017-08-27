@@ -17,7 +17,7 @@ const watchUpdates = () => {
   for (var model in mongo.models) {
     ws.subscribe(`connapp.server.${model.toLowerCase()}.update`, function(data) {
       mongo.models[model]
-      .findOne({_id: data._id, active: true}).exec()
+      .findOne({_id: data._id}).exec()
       .then(res => {
         if (!res) return false
         // deletes save so it won't conflict on merging
@@ -74,7 +74,7 @@ const watchSync = () => {
 
       console.log('Fetch was triggered')
       mongo.models[model]
-        .find({active: true}).exec()
+        .find().exec()
         .then(data => {
           // If nothing is found, does nothing
           if (!data.length) return true
