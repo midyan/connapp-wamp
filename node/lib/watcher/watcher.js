@@ -87,6 +87,7 @@ const watchSync = () => {
               console.log('sent to insert '+ item)
               dispatcher.insertToApp(model, item)
             } else {
+              console.log(item)
               console.log('sent to update '+ item)
               dispatcher.updateDocumentToApp(model, _id, item)
             }
