@@ -31,6 +31,18 @@ const models = {
       },
       body: {
         type: String
+      },
+      active: {
+        type: Boolean,
+        default: true
+      },
+      createdAt: {
+        type: Date,
+        default: Date.now
+      }
+      updatedAt: {
+        type: Date,
+        default: Date.now
       }
     }
 
@@ -40,9 +52,11 @@ const models = {
     //Defines Pre-Save hook
     dataSchema.pre('save', function(next){
       // Defines arguments for dispatch function
+      this.updatedAt = new Date()
+
       const _id = this._id.toString(),
             data = _.cloneDeep(this)
-            
+
       // Dispatches for realtimeUpdate
       if (this.isNew) {
         dispatcher.insertToApp(modelName, data)
