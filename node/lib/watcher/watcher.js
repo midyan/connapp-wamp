@@ -33,7 +33,7 @@ const watchUpdates = () => {
         return res.save()
       })
       .then(res => {
-        console.log(res)
+        // console.log(res)
       })
       .catch(err => console.log(err))
     })
@@ -84,11 +84,11 @@ const watchSync = () => {
           data.forEach(item => {
             const _id = item._id.toString()
             if ( ids.indexOf(_id) == -1 ) {
-              console.log('sent to insert '+ item)
+              console.log('sent to insert '+uri)
               dispatcher.insertToApp(model, item)
             } else {
               console.log(item)
-              console.log('sent to update '+ item)
+              console.log('sent to update '+ uri)
               dispatcher.updateDocumentToApp(model, _id, item)
             }
           })

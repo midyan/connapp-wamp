@@ -31,7 +31,7 @@ const insertToApp = (model, data = {}) => {
 const updateDocumentToApp = (model, _id, data = {}) => {
   // Builds event string
   const event = `connapp.app.${model.toLowerCase()}.update.${_id}`
-  console.log(event, data)
+  // console.log(event, data)
   // Publish the event
   ws.publish(
     event,
