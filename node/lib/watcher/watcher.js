@@ -64,7 +64,8 @@ const watchInserts = () => {
  * Function to watch for inserts on all collections
  */
 const watchSync = () => {
-  for (var model in mongo.models) {
+  Object.keys(mongo.models).forEach(model => {
+    const Model = mongo.models[model]
     const uri = `connapp.server.${model.toLowerCase()}.fetch`
     console.log(uri)
     ws.subscribe(uri, (args) => {
@@ -73,7 +74,8 @@ const watchSync = () => {
       const ids = sentData.argsList
 
       console.log(uri+' was triggered')
-      mongo.models[model]
+
+      Model
         .find().exec()
         .then(data => {
           // If nothing is found, does nothing
