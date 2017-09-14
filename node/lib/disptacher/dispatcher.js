@@ -24,7 +24,7 @@ const insertToApp = (model, data = {}) => {
     [data]
   )
 
-  console.log(event + ' was published')
+ //  console.log(event + ' was published')
 }
 
 // FUnction to tell the App to update local documento o model
@@ -38,7 +38,7 @@ const updateDocumentToApp = (model, _id, data = {}) => {
     [data]
   )
 
-  console.log(event + ' was published')
+  // console.log(event + ' was published')
 
 }
 

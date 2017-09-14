@@ -67,12 +67,13 @@ const watchSync = () => {
   Object.keys(mongo.models).forEach(model => {
     const Model = mongo.models[model]
     const uri = `connapp.server.${model.toLowerCase()}.fetch`
-    console.log(uri)
-    ws.subscribe(uri, (args) => {
+    // console.log(uri)
+    ws.subscribe(uri, (args, kwargs) => {
       // console.log(args)
       const sentData = (((args.argsDict || {}).data || [])[0] || {})
       const ids = sentData.argsList
-      console.log(sentData)
+      const mobileQuery = sentData.argsDict
+      console.log(mobileQuery)
       // console.log(uri+' was triggered')
 
       Model

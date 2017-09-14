@@ -1,4 +1,4 @@
-const
+var
   INDEX = require('../index.js'),
   mongo = INDEX.mongo,
   date = new Date(),
