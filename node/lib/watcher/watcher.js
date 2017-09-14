@@ -95,7 +95,7 @@ const watchSync = () => {
 	      })
         .catch(err => console.log(err))
     })
-  }
+  })
 }
 
 const watchersObj = {
