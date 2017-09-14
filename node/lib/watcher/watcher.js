@@ -73,12 +73,13 @@ const watchSync = () => {
       const sentData = (((args.argsDict || {}).data || [])[0] || {})
       const ids = sentData.argsList
       const mobileQuery = sentData.argsDict
-      console.log(mobileQuery)
+
       // console.log(uri+' was triggered')
 
       Model
-        .find().exec()
+        .find(mobileQuery).exec()
         .then(data => {
+          console.log(data)
           // If nothing is found, does nothing
           if (!data.length) return true
 
