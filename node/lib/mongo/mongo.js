@@ -17,42 +17,237 @@ mongoose.connect(MONGO.URL)
 
 //Models
 const models = {
-  fakenews: () => {
-    // Defines collection namem
-    const collectionName = 'fakenews'
-
-    // Defines model name
-    const modelName = 'fakenews'
-
-    // Defines model for the schema
+  events: () => {
+    //Model info
+    const collectionName = 'events'
+    const modelName = 'events'
     const model =  {
-      title: {
+      name: {
+        type: String,
+        required: true
+      },
+      start: {
+        type: Date,
+        required: true
+      },
+      end: {
+        type: Date,
+        required: true
+      },
+      local: {
+        type: ObjectId
+      },
+      order: {
+        type: Number,
+        required: false
+      },
+      eventType: {
+        type: ObjectId
+      },
+      speakers: [{
+        type: ObjectId
+      }],
+      likes: {
+        type: Number,
+        required: false
+      },
+      active: {
+        type: Boolean,
+        default: true
+      },
+      lastUpdate: {
+        type: Date,
+        default: Date.now,
+      },
+      createAt: {
+        type: Date,
+        default: Date.now,
+      },
+    }
+
+    //Define Schema
+    const dataSchema = mongoose.Schema(model, {collection: collectionName})
+
+    //Defines Pre-Save hook
+    dataSchema.pre('save', function(next){
+      // Defines arguments for dispatch function
+      this.lastUpdate = new Date()
+
+      const _id = this._id.toString(),
+            data = _.cloneDeep(this)
+
+      // Dispatches for realtimeUpdate
+      if (this.isNew) {
+        dispatcher.insertToApp(modelName, data)
+      } else {
+        dispatcher.updateDocumentToApp(modelName, _id, data)
+      }
+
+      next()
+    })
+
+    //return Schema and Model Name
+    return {
+      schema: dataSchema,
+      name: modelName
+    }
+  },
+  locals: () => {
+    //Model info
+    const collectionName = 'locals'
+    const modelName = 'locals'
+    const model =  {
+      name: {
+        type: String,
+        required: true
+      },
+      mapImage: {
+        type: String,
+        required: false
+      },
+      active: {
+        type: Boolean,
+        default: true
+      },
+      createAt: {
+        type: Date,
+        default: Date.now
+      },
+      lastUpdate: {
+        type: Date,
+        default: Date.now
+      }
+    }
+
+    //Define Schema
+    const dataSchema = mongoose.Schema(model, {collection: collectionName})
+
+    //Define hooks
+    dataSchema.pre('save', function(next){
+      // Defines arguments for dispatch function
+      this.lastUpdate = new Date()
+
+      const _id = this._id.toString(),
+            data = _.cloneDeep(this)
+
+      // Dispatches for realtimeUpdate
+      if (this.isNew) {
+        dispatcher.insertToApp(modelName, data)
+      } else {
+        dispatcher.updateDocumentToApp(modelName, _id, data)
+      }
+
+      next()
+    })
+
+    //return Schema and Model Name
+    return {
+      schema: dataSchema,
+      name: modelName
+    }
+  },
+  eventType: () => {
+    //Model info
+    const collectionName = 'eventType'
+    const modelName = 'eventType'
+    const model =  {
+      name: {
+        type: String,
+        required: true
+      },
+      active: {
+        type: Boolean,
+        default: true
+      },
+      createAt: {
+        type: Date,
+        default: Date.now
+      },
+      lastUpdate: {
+        type: Date,
+        default: Date.now
+      }
+    }
+
+    //Define Schema
+    const dataSchema = mongoose.Schema(model, {collection: collectionName})
+
+    //Define hooks
+    dataSchema.pre('save', function(next){
+      // Defines arguments for dispatch function
+      this.lastUpdate = new Date()
+
+      const _id = this._id.toString(),
+            data = _.cloneDeep(this)
+
+      // Dispatches for realtimeUpdate
+      if (this.isNew) {
+        dispatcher.insertToApp(modelName, data)
+      } else {
+        dispatcher.updateDocumentToApp(modelName, _id, data)
+      }
+
+      next()
+    })
+
+    //return Schema and Model Name
+    return {
+      schema: dataSchema,
+      name: modelName
+    }
+  },
+  speakers: () => {
+    //Model info
+    const collectionName = 'speakers'
+    const modelName = 'speakers'
+    const model =  {
+      name: {
+        type: String,
+        required: true
+      },
+      institution: {
+        type: String,
+        required: false
+      },
+      image: {
+        perfil: {
+          type: String
+        },
+        cover: {
+          type: String
+        },
+        type: Object
+      },
+      profession: {
         type: String
       },
-      body: {
+      about: {
+        type: String
+      },
+      media: {
         type: String
       },
       active: {
         type: Boolean,
         default: true
       },
-      createdAt: {
+      createAt: {
         type: Date,
         default: Date.now
       },
-      updatedAt: {
+      lastUpdate: {
         type: Date,
         default: Date.now
       }
     }
 
-    //Defines Schema using model and collection name
+    //Define Schema
     const dataSchema = mongoose.Schema(model, {collection: collectionName})
 
-    //Defines Pre-Save hook
+    //Define hooks
     dataSchema.pre('save', function(next){
       // Defines arguments for dispatch function
-      this.updatedAt = new Date()
+      this.lastUpdate = new Date()
 
       const _id = this._id.toString(),
             data = _.cloneDeep(this)
@@ -74,44 +269,7 @@ const models = {
     }
   }
 
-  // #----Example----#
-  // User: () => {
-  //   //Model info
-  //   var collectionName = ''
-  //   var modelName = ''
-  //   var model = {
-  //     email: {
-  //       type: String,
-  //       required: true
-  //     },
-  //     name: {
-  //       type: String,
-  //       required: false,
-  //     },
-  //     password: {
-  //       type: String,
-  //       required: true
-  //     },
-  //     date_registered: {
-  //       type: Date,
-  //       default: Date.now
-  //     }
-  //   }
-  //
-  //   //Define Schema
-  //   var dataSchema = mongoose.Schema(model, {collection: collectionName})
-  //
-  //   //Define hooks
-  //   dataSchema.pre('save', function(next){
-  //     next()
-  //   })
-  //
-  //   //return Schema and Model Name
-  //   return {
-  //     schema: dataSchema,
-  //     name: modelName
-  //   }
-  // }
+
 }
 
 // Export functon, to compile all models
