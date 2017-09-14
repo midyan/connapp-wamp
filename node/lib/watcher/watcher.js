@@ -69,11 +69,11 @@ const watchSync = () => {
     const uri = `connapp.server.${model.toLowerCase()}.fetch`
     console.log(uri)
     ws.subscribe(uri, (args) => {
-      console.log(args)
+      // console.log(args)
       const sentData = (((args.argsDict || {}).data || [])[0] || {})
       const ids = sentData.argsList
-
-      console.log(uri+' was triggered')
+      console.log(sentData)
+      // console.log(uri+' was triggered')
 
       Model
         .find().exec()
@@ -81,14 +81,14 @@ const watchSync = () => {
           // If nothing is found, does nothing
           if (!data.length) return true
 
-          console.log(ids)
+          // console.log(ids)
           // Loops through the found data and dispatch route accordingly
           data.forEach(item => {
             const _id = item._id.toString()
             if ( ids.indexOf(_id) == -1 ) {
               dispatcher.insertToApp(model, item)
             } else {
-              console.log(item)
+              // console.log(item)
               dispatcher.updateDocumentToApp(model, _id, item)
             }
           })
