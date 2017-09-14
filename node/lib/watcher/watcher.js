@@ -72,7 +72,7 @@ const watchSync = () => {
       const sentData = (((args.argsDict || {}).data || [])[0] || {})
       const ids = sentData.argsList
 
-      console.log('Fetch was triggered')
+      console.log(uri+' was triggered')
       mongo.models[model]
         .find().exec()
         .then(data => {
@@ -84,11 +84,9 @@ const watchSync = () => {
           data.forEach(item => {
             const _id = item._id.toString()
             if ( ids.indexOf(_id) == -1 ) {
-              console.log('sent to insert '+uri)
               dispatcher.insertToApp(model, item)
             } else {
               console.log(item)
-              console.log('sent to update '+ uri)
               dispatcher.updateDocumentToApp(model, _id, item)
             }
           })
