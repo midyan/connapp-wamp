@@ -281,7 +281,7 @@ module.exports = () => {
     const model = value()
 
     // Returns compiled module
-    return mongoose.model(model.modelName, model.schema)
+    return mongoose.model(model.name, model.schema)
   })
 
   // Return Object with compiled odels and mongoose connection object
