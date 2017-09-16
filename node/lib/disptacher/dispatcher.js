@@ -24,14 +24,14 @@ const insertToApp = (model, data = {}, length = undefined) => {
     [data, length]
   )
 
-  console.log(event + ' was published')
+  console.log(event + ' was published ' + length)
 }
 
 // FUnction to tell the App to update local documento o model
 const updateDocumentToApp = (model, _id, data = {}) => {
   // Builds event string
   const event = `connapp.app.${model.toLowerCase()}.update.${_id}`
-  console.log(event, data)
+  // console.log(event, data)
   // Publish the event
   ws.publish(
     event,

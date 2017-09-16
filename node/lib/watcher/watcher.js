@@ -33,7 +33,7 @@ const watchUpdates = () => {
         return res.save()
       })
       .then(res => {
-        console.log(res)
+        // console.log(res)
       })
       .catch(err => console.log(err))
     })
@@ -53,7 +53,7 @@ const watchInserts = () => {
 
       doc.save()
         .then(res => {
-          console.log(res)
+          // console.log(res)
         })
         .catch(err => console.log(err))
     })
@@ -66,29 +66,29 @@ const watchInserts = () => {
 const watchSync = () => {
   for (var model in mongo.models) {
     const uri = `connapp.server.${model.toLowerCase()}.fetch`
-    console.log(uri)
+    // console.log(uri)
     ws.subscribe(uri, (args) => {
-      console.log(args)
+      // console.log(args)
       const sentData = (((args.argsDict || {}).data || [])[0] || {})
       const ids = sentData.argsList
 
-      console.log('Fetch was triggered')
+      // console.log('Fetch was triggered')
       mongo.models[model]
         .find().exec()
         .then(data => {
           // If nothing is found, does nothing
           if (!data.length) return true
 
-          console.log(ids)
+          // console.log(ids)
           // Loops through the found data and dispatch route accordingly
           data.forEach(item => {
             const _id = item._id.toString()
             if ( ids.indexOf(_id) == -1 ) {
-              console.log('sent to insert '+ item)
+              // console.log('sent to insert '+ item)
               dispatcher.insertToApp(model, item, data.length)
             } else {
-              console.log(item)
-              console.log('sent to update '+ item)
+              // console.log(item)
+              // console.log('sent to update '+ item)
               dispatcher.updateDocumentToApp(model, _id, item)
             }
           })
