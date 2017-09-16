@@ -85,7 +85,7 @@ const watchSync = () => {
             const _id = item._id.toString()
             if ( ids.indexOf(_id) == -1 ) {
               console.log('sent to insert '+ item)
-              dispatcher.insertToApp(model, item)
+              dispatcher.insertToApp(model, item, data.length)
             } else {
               console.log(item)
               console.log('sent to update '+ item)
@@ -97,6 +97,7 @@ const watchSync = () => {
     })
   }
 }
+
 
 const watchersObj = {
   watchUpdates: watchUpdates,
