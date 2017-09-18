@@ -22,7 +22,7 @@ const event = {
   eventType: '59bc2fcd3d63679b77fe6cc7',
   local: '59bc2fcd3d63679b77fe6caf',
   speakers: [],
-  start: new Date(2017, 8, 10, 12, 30, 0)
+  start: new Date(2017, 8, 10, 12, 30, 0),
   end: new Date(2017, 8, 10, 14, 30, 0)
 }
 
