@@ -18,7 +18,7 @@ const hours = [hour, minute, seconds].join(':')
 const timestamp = dateString + ' ' + hours
 
 const query = {
-  _id: '59bc2fcf3d63679b77fe6d75'
+  _id: '59bc2fcd3d63679b77fe6c9d'
 }
 
 mongo.models.locals.findOne(query)
