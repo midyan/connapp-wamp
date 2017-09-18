@@ -72,7 +72,8 @@ const watchSync = () => {
       // console.log(args)
       const sentData = (((args.argsDict || {}).data || [])[0] || {})
       const ids = sentData.argsList
-      const mobileQuery = sentData.argsDict
+      const mobileQuery = sentData.argsDict.query
+      const mobileSession = sentData.argsDict.session
 
       // console.log(uri+' was triggered')
 
@@ -88,10 +89,10 @@ const watchSync = () => {
           data.forEach(item => {
             const _id = item._id.toString()
             if ( ids.indexOf(_id) == -1 ) {
-              dispatcher.insertToApp(model, item, data.length)
+              dispatcher.insertToApp(model, item, data.length, mobileSession)
             } else {
               // console.log(item)
-              dispatcher.updateDocumentToApp(model, _id, item)
+              dispatcher.updateDocumentToApp(model, _id, item, mobileSession)
             }
           })
 	      })

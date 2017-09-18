@@ -14,7 +14,7 @@ const ws = INDEX.connection
  * @param  {String} _id       ID of the documento to perform publish
  * @param  {Object} [data={}] Updated data to send
  */
-const insertToApp = (model, data = {}, length = undefined) => {
+const insertToApp = (model, data = {}, length = undefined, session = '') => {
   // Builds event string
   const event = `connapp.app.${model.toLowerCase()}.insert`
 
@@ -28,9 +28,11 @@ const insertToApp = (model, data = {}, length = undefined) => {
 }
 
 // FUnction to tell the App to update local documento o model
-const updateDocumentToApp = (model, _id, data = {}) => {
+const updateDocumentToApp = (model, _id, data = {}, session = undefined) => {
   // Builds event string
-  const event = `connapp.app.${model.toLowerCase()}.update.${_id}`
+  let sessionString = `${session}.`
+  const event =
+    `connapp.app.${session? sessionString : ''}${model.toLowerCase()}.update.${_id}`
   // console.log(event, data)
   // Publish the event
   ws.publish(
