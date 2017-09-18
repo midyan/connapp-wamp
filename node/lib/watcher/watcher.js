@@ -53,7 +53,7 @@ const watchInserts = () => {
 
       doc.save()
         .then(res => {
-          console.log(res)
+          // console.log(res)
         })
         .catch(err => console.log(err))
     })
@@ -79,7 +79,7 @@ const watchSync = () => {
       Model
         .find(mobileQuery).exec()
         .then(data => {
-          console.log(data)
+          // console.log(data)
           // If nothing is found, does nothing
           if (!data.length) return true
 
@@ -88,7 +88,7 @@ const watchSync = () => {
           data.forEach(item => {
             const _id = item._id.toString()
             if ( ids.indexOf(_id) == -1 ) {
-              dispatcher.insertToApp(model, item)
+              dispatcher.insertToApp(model, item, data.length)
             } else {
               // console.log(item)
               dispatcher.updateDocumentToApp(model, _id, item)
