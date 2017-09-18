@@ -21,9 +21,9 @@ const query = {
   _id: '59bc2fcf3d63679b77fe6d75'
 }
 
-mongo.models.events.findOne(query)
+mongo.models.locals.findOne(query)
   .then(res => {
-    res.local = '59bc2fcd3d63679b77fe6ca0'
+    res.name = 'Mudei'
     return res.save()
   })
   .then(res => console.log('Notícia foi editada com sucesso'))
