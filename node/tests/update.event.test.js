@@ -23,8 +23,7 @@ const query = {
 
 mongo.models.events.findOne(query)
   .then(res => {
-    res.start = new Date(new Date(res.start).getTime() - 60*60*1000)
-    res.end = new Date(new Date(res.end).getTime() - 60*60*1000)
+    res.eventType = '59bc2fce3d63679b77fe6d00'
     return res.save()
   })
   .then(res => console.log('Notícia foi editada com sucesso'))
