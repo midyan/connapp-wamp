@@ -18,12 +18,12 @@ const hours = [hour, minute, seconds].join(':')
 const timestamp = dateString + ' ' + hours
 
 const query = {
-  _id: '59bc2fcd3d63679b77fe6ca0'
+  _id: '59bc2fce3d63679b77fe6d28'
 }
 
-mongo.models.locals.findOne(query)
+mongo.models.events.findOne(query)
   .then(res => {
-    res.name = 'Tsturio'
+    res.name = 'Coquetel Sincronizado'
     return res.save()
   })
   .then(res => console.log('Notícia foi editada com sucesso'))
