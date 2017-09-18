@@ -21,7 +21,7 @@ const query = {
   _id: '59bc2fce3d63679b77fe6cde'
 }
 
-mongo.models.event.findOne(query)
+mongo.models.events.findOne(query)
   .then(res => {
     res.Nam = 'O Título foi editado!!!  Realizado em: ' + timestamp
     return res.save()
