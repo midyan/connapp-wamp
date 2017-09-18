@@ -23,7 +23,7 @@ const query = {
 
 mongo.models.events.findOne(query)
   .then(res => {
-    res.eventType = '59bc2fce3d63679b77fe6d00'
+    res.local = '59bc2fcd3d63679b77fe6ca0'
     return res.save()
   })
   .then(res => console.log('Notícia foi editada com sucesso'))
