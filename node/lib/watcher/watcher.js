@@ -75,6 +75,7 @@ const watchSync = () => {
       const mobileQuery = sentData.argsDict.query
       const mobileSession = sentData.argsDict.session
 
+      console.log(sentData.argsDict)
       // console.log(uri+' was triggered')
 
       Model
