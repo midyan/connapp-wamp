@@ -74,6 +74,7 @@ const watchSync = () => {
       const ids = sentData.argsList
       const mobileQuery = sentData.argsDict.query
       const mobileSession = sentData.argsDict.session
+      const fecthAll = sentData.argsDict.fetchAll === true
 
       console.log(sentData.argsDict)
       // console.log(uri+' was triggered')
@@ -87,15 +88,21 @@ const watchSync = () => {
 
           // console.log(ids)
           // Loops through the found data and dispatch route accordingly
-          data.forEach(item => {
-            const _id = item._id.toString()
-            if ( ids.indexOf(_id) == -1 ) {
-              dispatcher.insertToApp(model, item, data.length, mobileSession)
-            } else {
-              // console.log(item)
-              dispatcher.updateDocumentToApp(model, _id, item, mobileSession)
-            }
-          })
+
+          if (!fecthAll) {
+            data.forEach(item => {
+              const _id = item._id.toString()
+              if ( ids.indexOf(_id) == -1 ) {
+                dispatcher.insertToApp(model, item, data.length, mobileSession)
+              } else {
+                // console.log(item)
+                dispatcher.updateDocumentToApp(model, _id, item, mobileSession)
+              }
+            })
+          } else {
+            dispatcher.insertToApp(model, data, data.length, mobileSession)
+          }
+
 	      })
         .catch(err => console.log(err))
     })
