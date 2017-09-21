@@ -100,9 +100,24 @@ const watchSync = () => {
               }
             })
           } else {
-            _.chunk(data, 10).forEach(item => {
-              dispatcher.insertToApp(model, item, data.length, mobileSession)
+            const insertData = data.filter(item => {
+              return ids.indexOf(item._id) == -1
             })
+            const updateData = data.filter(item => {
+              return ids.indexOf(item._id) != -1
+            })
+
+            if (insertData.length) {
+              _.chunk(insertData, 10).forEach(item => {
+                dispatcher.insertToApp(model, item, data.length, mobileSession)
+              })
+            }
+
+            if (updateData.length) {
+              updateData.forEach(item => {
+                dispatcher.updateDocumentToApp(model, _id, item, mobileSession)
+              })
+            }
           }
 
 	      })
