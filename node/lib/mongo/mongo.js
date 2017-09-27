@@ -49,6 +49,7 @@ const models = {
       }],
       likes: {
         type: Number,
+        default: 0,
         required: false
       },
       active: {
