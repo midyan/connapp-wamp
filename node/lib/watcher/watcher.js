@@ -14,9 +14,10 @@ const dispatcher = INDEX.dispatcher
  * Function to watch for updates on all collections
  */
 const watchUpdates = () => {
-  for (var model in mongo.models) {
-    ws.subscribe(`connapp.server.${model.toLowerCase()}.update`, function(data) {
-      mongo.models[model]
+  Object.keys(mongo.models).forEach(model => {
+    const Model = mongo.models[model]
+    ws.subscribe(`connapp.server.${model.toLowerCase()}.update`, data => {
+      Model
       .findOne({_id: data._id}).exec()
       .then(res => {
         if (!res) return false
@@ -37,16 +38,17 @@ const watchUpdates = () => {
       })
       .catch(err => console.log(err))
     })
-  }
+  })
 }
 
 /**
  * Function to watch for inserts on all collections
  */
 const watchInserts = () => {
-  for (var model in mongo.models) {
+  Object.keys(mongo.models).forEach(model => {
+    const Model = mongo.models[model]
     ws.subscribe(`connapp.server.${model.toLowerCase()}.insert`, function(data) {
-      let doc = new mongo.models[model](data)
+      let doc = new Model(data)
 
       // Make sure this is treated as new by the post-save hook
       doc.isNew = true
@@ -57,7 +59,7 @@ const watchInserts = () => {
         })
         .catch(err => console.log(err))
     })
-  }
+  })
 }
 
 /**
