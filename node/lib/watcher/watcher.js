@@ -23,9 +23,9 @@ const watchUpdates = () => {
       const mobileQuery = sentData.argsDict.query
       const mobileSetdata = sentData.argsDict.setData
       const upsert = true
-
+      
       Model
-        .findOneAndUpdate(mobileQuery, mobileSetdata, { upsert }).exec()
+        .findOneAndUpdate(mobileQuery, mobileSetdata, { upsert, new: true }).exec()
         .then(updatedDoc => {
           dispatcher.updateDocumentToApp(model, updatedDoc._id, updatedDoc)
         })
