@@ -17,7 +17,7 @@ const watchUpdates = () => {
   Object.keys(mongo.models).forEach(model => {
     const Model = mongo.models[model]
     ws.subscribe(`connapp.server.${model.toLowerCase()}.update`, args => {
-      
+
       const sentData = (((args.argsDict || {}).data || [])[0] || {})
       console.log(sentData)
       const mobileQuery = sentData.argsDict.query
@@ -108,7 +108,7 @@ const watchSync = () => {
             })
 
             if (insertData.length) {
-              _.chunk(insertData, 10).forEach(item => {
+              _.chunk(insertData, 100).forEach(item => {
                 dispatcher.insertToApp(model, item, data.length, mobileSession)
               })
             }
