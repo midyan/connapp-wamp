@@ -16,25 +16,17 @@ const dispatcher = INDEX.dispatcher
 const watchUpdates = () => {
   Object.keys(mongo.models).forEach(model => {
     const Model = mongo.models[model]
-    ws.subscribe(`connapp.server.${model.toLowerCase()}.update`, data => {
+    ws.subscribe(`connapp.server.${model.toLowerCase()}.update`, args => {
+      // console.log(args)
+      const sentData = (((args.argsDict || {}).data || [])[0] || {})
+      const mobileQuery = sentData.argsDict.query
+      const mobileSetdata = sentData.argsDict.setData
+      const upsert = true
+
       Model
-      .findOne({_id: data._id}).exec()
-      .then(res => {
-        if (!res) return false
-        // deletes save so it won't conflict on merging
-        delete res.save
-
-        // merges with new data
-        merge(res, data)
-
-        // Makes sure this is treated as an update by the post save hook
-        res.isNew = false
-
-        // saves Updated item
-        return res.save()
-      })
-      .then(res => {
-        // console.log(res)
+      .findOneAndUpdate(mobileQuery, mobileSetdata, { upsert }).exec()
+      .then(updatedDoc => {
+        dispatcher.updateDocumentToApp(model, updatedDoc._id, updatedDoc)
       })
       .catch(err => console.log(err))
     })
@@ -47,15 +39,19 @@ const watchUpdates = () => {
 const watchInserts = () => {
   Object.keys(mongo.models).forEach(model => {
     const Model = mongo.models[model]
-    ws.subscribe(`connapp.server.${model.toLowerCase()}.insert`, function(data) {
-      let doc = new Model(data)
+    ws.subscribe(`connapp.server.${model.toLowerCase()}.insert`, data => {
+      console.log(`connapp.server.${model.toLowerCase()}.insert Triggered`)
+      const sentData = (((args.argsDict || {}).data || [])[0] || {})
+      const mobileData = sentData.argsDict.data
+
+      let doc = new Model(mobileData)
 
       // Make sure this is treated as new by the post-save hook
       doc.isNew = true
 
       doc.save()
         .then(res => {
-          // console.log(res)
+          dispatcher.insertToApp(model, res)
         })
         .catch(err => console.log(err))
     })
@@ -70,7 +66,7 @@ const watchSync = () => {
     const Model = mongo.models[model]
     const uri = `connapp.server.${model.toLowerCase()}.fetch`
     // console.log(uri)
-    ws.subscribe(uri, (args, kwargs) => {
+    ws.subscribe(uri, args => {
       // console.log(args)
       const sentData = (((args.argsDict || {}).data || [])[0] || {})
       const ids = sentData.argsList
@@ -78,7 +74,7 @@ const watchSync = () => {
       const mobileSession = sentData.argsDict.session
       const fecthAll = sentData.argsDict.fetchAll === true
 
-      console.log(sentData.argsDict)
+      console.log(`connapp.server.${model.toLowerCase()}.fetch Triggered`)
       // console.log(uri+' was triggered')
 
       Model

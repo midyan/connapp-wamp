@@ -20,10 +20,12 @@ const insertToApp = (model, data = {}, length = undefined, session = undefined) 
     `connapp.app.${session}.${model.toLowerCase()}.insert` :
     `connapp.app.${model.toLowerCase()}.insert`
 
+  const publishArray = length? [data, length] : [data]
+
   // Publish the event
   ws.publish(
     event,
-    [data, length]
+    publishArray
   )
 
   console.log(event + ' was published. Total of: ' + length)
