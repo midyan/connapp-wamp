@@ -39,7 +39,7 @@ const watchUpdates = () => {
 const watchInserts = () => {
   Object.keys(mongo.models).forEach(model => {
     const Model = mongo.models[model]
-    ws.subscribe(`connapp.server.${model.toLowerCase()}.insert`, data => {
+    ws.subscribe(`connapp.server.${model.toLowerCase()}.insert`, args => {
       console.log(`connapp.server.${model.toLowerCase()}.insert Triggered`)
       const sentData = (((args.argsDict || {}).data || [])[0] || {})
       const mobileData = sentData.argsDict.data
