@@ -46,7 +46,7 @@ const updateDocumentToApp = (model, _id, data = {}, session = undefined) => {
     [data]
   )
 
-  // console.log(event + ' was published')
+  console.log(event + ' was published')
 
 }
 
