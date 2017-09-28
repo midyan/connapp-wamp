@@ -42,6 +42,7 @@ const watchInserts = () => {
     ws.subscribe(`connapp.server.${model.toLowerCase()}.insert`, args => {
       console.log(`connapp.server.${model.toLowerCase()}.insert Triggered`)
       const sentData = (((args.argsDict || {}).data || [])[0] || {})
+      console.log(sentData)
       const mobileData = sentData.argsDict.data
 
       let doc = new Model(mobileData)
