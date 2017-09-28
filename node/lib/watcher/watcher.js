@@ -17,8 +17,9 @@ const watchUpdates = () => {
   Object.keys(mongo.models).forEach(model => {
     const Model = mongo.models[model]
     ws.subscribe(`connapp.server.${model.toLowerCase()}.update`, args => {
-      // console.log(args)
+      
       const sentData = (((args.argsDict || {}).data || [])[0] || {})
+      console.log(sentData)
       const mobileQuery = sentData.argsDict.query
       const mobileSetdata = sentData.argsDict.setData
       const upsert = true

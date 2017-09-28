@@ -23,7 +23,7 @@ const query = {
 
 mongo.models.events.findOne(query)
   .then(res => {
-    res.name = 'Coquetel Sincronizado'
+    res.name = 'Coquetel de Abertura'
     return res.save()
   })
   .then(res => console.log('Notícia foi editada com sucesso'))
