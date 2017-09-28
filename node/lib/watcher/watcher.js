@@ -24,11 +24,11 @@ const watchUpdates = () => {
       const upsert = true
 
       Model
-      .findOneAndUpdate(mobileQuery, mobileSetdata, { upsert }).exec()
-      .then(updatedDoc => {
-        dispatcher.updateDocumentToApp(model, updatedDoc._id, updatedDoc)
-      })
-      .catch(err => console.log(err))
+        .findOneAndUpdate(mobileQuery, mobileSetdata, { upsert }).exec()
+        .then(updatedDoc => {
+          dispatcher.updateDocumentToApp(model, updatedDoc._id, updatedDoc)
+        })
+        .catch(err => console.log(err))
     })
   })
 }
@@ -74,7 +74,7 @@ const watchSync = () => {
       const mobileSession = sentData.argsDict.session
       const fecthAll = sentData.argsDict.fetchAll === true
 
-      console.log(`connapp.server.${model.toLowerCase()}.fetch Triggered`)
+      console.log(`${uri} Triggered`)
       // console.log(uri+' was triggered')
 
       Model
