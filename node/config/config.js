@@ -13,7 +13,7 @@ const DIR = {
 
 // Mongo connection config object
 const MONGO = {
-  URL: 'mongodb://localhost'
+  URL: 'mongodb://localhost:27017/enegep'
 }
 
 // Websocket/WAMP config object
