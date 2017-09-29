@@ -16,6 +16,7 @@ const ws = INDEX.connection
  */
 const insertToApp = (model, data = {}, length = undefined, session = undefined) => {
   // Builds event string
+  console.log('Starting insert dispatch')
   const event = session?
     `connapp.app.${session}.${model.toLowerCase()}.insert` :
     `connapp.app.${model.toLowerCase()}.insert`
@@ -35,6 +36,7 @@ const insertToApp = (model, data = {}, length = undefined, session = undefined) 
 const updateDocumentToApp = (model, _id, data = {}, session = undefined) => {
   // Builds event string
 
+  console.log('Starting update dispatch')
   const event = session?
     `connapp.app.${session}.${model.toLowerCase()}.update.${_id}` :
     `connapp.app.${model.toLowerCase()}.update.${_id}`
