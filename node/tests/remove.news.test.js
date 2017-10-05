@@ -1,11 +1,10 @@
-var
+let
   INDEX = require('../index.js'),
   mongo = INDEX.mongo,
   date = new Date(),
   day = date.getDate(),
   month = date.getMonth() + 1,
   year = date.getFullYear(),
-  dateString = [day, month, year].join('/'),
   hour = date.getHours().toString(),
   minute = date.getMinutes().toString(),
   seconds = date.getSeconds().toString()
@@ -16,12 +15,12 @@ if (hour < 10) hour = '0' + hour
 if (minute < 10) minute = '0' + minute
 if (seconds < 10) seconds = '0' + seconds
 
+let dateString = [day, month, year].join('/')
+
 const hours = [hour, minute, seconds].join(':')
 const timestamp = dateString + ' ' + hours
 
-newsModel.isNew = true
-
-newsModel.findOne({})
+mongo.models.findOne({active: true})
   .then(res => {
     const _id = res._id
     return newsModel.update({_id}, { $set: { active: false } })
