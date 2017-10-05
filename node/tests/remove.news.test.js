@@ -23,8 +23,9 @@ const newsModel = mongo.models.news
 
 newsModel.findOne({active: true})
   .then(res => {
-    const _id = res._id
-    return newsModel.update({_id}, { $set: { active: false } })
+    res.active = false
+    res.isNew = false
+    return res.save()
   })
   .then(res => {
     console.log('Logical Remove com sucesso')
