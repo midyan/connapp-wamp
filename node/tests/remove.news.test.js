@@ -20,7 +20,7 @@ let dateString = [day, month, year].join('/')
 const hours = [hour, minute, seconds].join(':')
 const timestamp = dateString + ' ' + hours
 
-mongo.models.findOne({active: true})
+mongo.models.news.findOne({active: true})
   .then(res => {
     const _id = res._id
     return newsModel.update({_id}, { $set: { active: false } })
