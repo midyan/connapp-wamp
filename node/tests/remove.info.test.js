@@ -21,7 +21,7 @@ const hours = [hour, minute, seconds].join(':')
 const timestamp = dateString + ' ' + hours
 const infoModel = mongo.models.info
 
-newsModel.findOne({active: true})
+infoModel.findOne({active: true})
   .then(res => {
     res.active = false
     res.isNew = false
