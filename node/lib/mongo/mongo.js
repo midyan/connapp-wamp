@@ -15,7 +15,7 @@ const MONGO = INDEX.CONFIG.MONGO
 // Connect to Mongo
 mongoose.connect(MONGO.URL)
 
-const dispatchOnSave = (doc) => {
+const dispatchOnSave = (doc, modelName) => {
   const _id = doc._id.toString(),
         data = _.cloneDeep(doc)
 
@@ -140,7 +140,7 @@ const models = {
     //Define hooks
     dataSchema.pre('save', function(next){
       this.lastUpdated = new Date()
-      dispatchOnSave(this)
+      dispatchOnSave(this, modelName)
       next()
     })
 
@@ -202,7 +202,7 @@ const models = {
     //Define hooks
     dataSchema.pre('save', function(next){
       this.lastUpdated = new Date()
-      dispatchOnSave(this)
+      dispatchOnSave(this, modelName)
       next()
     })
 
@@ -257,7 +257,7 @@ const models = {
     //Define hooks
     dataSchema.pre('save', function(next){
       this.lastUpdated = new Date()
-      dispatchOnSave(this)
+      dispatchOnSave(this, modelName)
       next()
     })
 
@@ -353,7 +353,7 @@ const models = {
     //Define hooks
     dataSchema.pre('save', function(next){
       this.lastUpdated = new Date()
-      dispatchOnSave(this)
+      dispatchOnSave(this, modelName)
       next()
     })
 
@@ -423,7 +423,7 @@ const models = {
     //Define hooks
     dataSchema.pre('save', function(next){
       this.lastUpdated = new Date()
-      dispatchOnSave(this)
+      dispatchOnSave(this, modelName)
       next()
     })
 
