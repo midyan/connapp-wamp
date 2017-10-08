@@ -21,7 +21,9 @@ const insertToApp = (model, data = {}, length = undefined, session = undefined) 
     `connapp.app.${session}.${model.toLowerCase()}.insert` :
     `connapp.app.${model.toLowerCase()}.insert`
 
-  const publishArray = length? [data, length] : [data]
+  const isLengthValid = typeof length !== 'undefined'
+
+  const publishArray = isLengthValid? [data, length] : [data]
 
   // Publish the event
   ws.publish(
