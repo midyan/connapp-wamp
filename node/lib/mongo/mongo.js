@@ -43,14 +43,6 @@ const models = {
         required: true
       },
       /**
-      * Descrição do evento
-      * @type {String}
-      */
-      description: {
-        type: String,
-        required: true
-      },
-      /**
       * Data e hora que o evento irá começar.
       * @type {Date}
       */
@@ -78,7 +70,7 @@ const models = {
       * Palestrantes que irão ministrar o evento.
       * @type {Array}
       */
-      speaker: [{
+      speakers: [{
         type: ObjectId,
         ref: 'speaker'
       }],
@@ -105,7 +97,7 @@ const models = {
       */
       place: {
         type: ObjectId,
-        ref: 'places',
+        ref: 'place',
         required: true
       },
       /**
@@ -150,30 +142,30 @@ const models = {
       name: modelName
     }
   },
-  places: () => {
+  place: () => {
     //Model info
-    const collectionName = 'places'
-    const modelName = 'places'
-    const model =  {
+    const collectionName = 'place'
+    const modelName = 'place'
+    const model = {
       /**
-        * Nome do local.
-        * @type {String}
-        */
+      * Nome do local.
+      * @type {String}
+      */
       name: {
         type: String,
         required: true
       },
       /**
-        * Imagem com o mapa do local.
-        * @type {String}
-        */
+      * Imagem com o mapa do local.
+      * @type {String}
+      */
       mapImage: {
         type: String
       },
       /**
-        * Define se o local está ativo.
-        * @type {Boolean}
-        */
+      * Define se o local está ativo.
+      * @type {Boolean}
+      */
       active: {
         type: Boolean,
         default: true
@@ -187,9 +179,9 @@ const models = {
         default: Date.now
       },
       /**
-       * Data da última vez que os dados do local foi atualizado.
-       * @type {String}
-       */
+      * Data da última vez que os dados do local foi atualizado.
+      * @type {String}
+      */
       lastUpdate: {
         type: Date,
         default: Date.now
@@ -216,35 +208,35 @@ const models = {
     //Model info
     const collectionName = 'eventtype'
     const modelName = 'eventtype'
-    const model =  {
+    const model = {
       /**
-        * Nome do eventType.
-        * @type {String}
-        */
+      * Nome do eventType.
+      * @type {String}
+      */
       name: {
         type: String,
         required: true
       },
       /**
-        * Define se o eventType está ativo.
-        * @type {Boolean}
-        */
+      * Define se o eventType está ativo.
+      * @type {Boolean}
+      */
       active: {
         type: Boolean,
         default: true
       },
       /**
-        * Data de criação do eventType.
-        * @type {Date}
-        */
+      * Data de criação do eventType.
+      * @type {Date}
+      */
       createAt: {
         type: Date,
         default: Date.now
       },
       /**
-        * Data da última vez que os dados do eventType foi atualizado.
-        * @type {String}
-        */
+      * Data da última vez que os dados do eventType foi atualizado.
+      * @type {String}
+      */
       lastUpdate: {
         type: Date,
         default: Date.now
@@ -271,7 +263,7 @@ const models = {
     //Model info
     const collectionName = 'speaker'
     const modelName = 'speaker'
-    const model =  {
+    const model = {
       /**
       * Nome do palestrante.
       * @type {String}
@@ -301,7 +293,7 @@ const models = {
         type: String
       },
       /**
-      * ??
+      * Nome do local onde trabalha
       * @type {String}
       */
       institution: {
@@ -367,7 +359,7 @@ const models = {
     //Model info
     const collectionName = 'news'
     const modelName = 'news'
-    const model =  {
+    const model = {
       /**
       * Titulo da notícia.
       * @type {String}
@@ -437,7 +429,7 @@ const models = {
     //Model info
     const collectionName = 'info'
     const modelName = 'info'
-    const model =  {
+    const model = {
       /**
       * Titulo da informação.
       * @type {String}
