@@ -29,10 +29,10 @@ const dispatchOnSave = (doc, modelName) => {
 
 //Models
 const models = {
-  events: () => {
+  event: () => {
     //Model info
-    const collectionName = 'events'
-    const modelName = 'events'
+    const collectionName = 'event'
+    const modelName = 'event'
     const model =  {
       /**
       * Nome do evento.
@@ -78,9 +78,9 @@ const models = {
       * Palestrantes que irão ministrar o evento.
       * @type {Array}
       */
-      speakers: [{
+      speaker: [{
         type: ObjectId,
-        ref: 'speakers'
+        ref: 'speaker'
       }],
       /**
       * Tipo de evento
@@ -88,7 +88,7 @@ const models = {
       */
       eventType: {
         type: ObjectId,
-        ref: 'eventtypes',
+        ref: 'eventtype',
         required: true
       },
       /*
@@ -212,10 +212,10 @@ const models = {
       name: modelName
     }
   },
-  eventtypes: () => {
+  eventtype: () => {
     //Model info
-    const collectionName = 'eventtypes'
-    const modelName = 'eventtypes'
+    const collectionName = 'eventtype'
+    const modelName = 'eventtype'
     const model =  {
       /**
         * Nome do eventType.
@@ -267,10 +267,10 @@ const models = {
       name: modelName
     }
   },
-  speakers: () => {
+  speaker: () => {
     //Model info
-    const collectionName = 'speakers'
-    const modelName = 'speakers'
+    const collectionName = 'speaker'
+    const modelName = 'speaker'
     const model =  {
       /**
       * Nome do palestrante.
