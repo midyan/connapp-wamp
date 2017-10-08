@@ -110,7 +110,7 @@ const watchSync = () => {
             })
 
             if (insertData.length) {
-              _.chunk(insertData, 500).forEach(item => {
+              _.chunk(insertData, 20).forEach(item => {
                 dispatcher.insertToApp(model, item, data.length, mobileSession)
               })
             }
