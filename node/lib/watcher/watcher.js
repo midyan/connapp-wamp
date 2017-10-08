@@ -23,7 +23,7 @@ const watchUpdates = () => {
       const mobileQuery = sentData.argsDict.query
       const mobileSetdata = sentData.argsDict.setData
       const upsert = true
-      
+
       Model
         .findOneAndUpdate(mobileQuery, mobileSetdata, { upsert, new: true }).exec()
         .then(updatedDoc => {
@@ -84,7 +84,9 @@ const watchSync = () => {
         .then(data => {
           // console.log(data)
           // If nothing is found, does nothing
-          if (!data.length) return true
+          if (!data.length) {
+            dispatcher.insertToApp(model, {}, 0, mobileSession)
+          }
 
           // console.log(ids)
           // Loops through the found data and dispatch route accordingly
