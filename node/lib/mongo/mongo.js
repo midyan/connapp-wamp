@@ -29,10 +29,10 @@ const dispatchOnSave = (doc, modelName) => {
 
 //Models
 const models = {
-  event: () => {
+  events: () => {
     //Model info
-    const collectionName = 'event'
-    const modelName = 'event'
+    const collectionName = 'events'
+    const modelName = 'events'
     const model =  {
       /**
       * Nome do evento.
@@ -72,15 +72,15 @@ const models = {
       */
       speakers: [{
         type: ObjectId,
-        ref: 'speaker'
+        ref: 'speakers'
       }],
       /**
       * Tipo de evento
       * @type {ObjectId}
       */
-      eventType: {
+      eventtype: {
         type: ObjectId,
-        ref: 'eventtype',
+        ref: 'eventtypes',
         required: true
       },
       /*
@@ -97,7 +97,7 @@ const models = {
       */
       place: {
         type: ObjectId,
-        ref: 'place',
+        ref: 'places',
         required: true
       },
       /**
@@ -142,10 +142,10 @@ const models = {
       name: modelName
     }
   },
-  place: () => {
+  places: () => {
     //Model info
-    const collectionName = 'place'
-    const modelName = 'place'
+    const collectionName = 'places'
+    const modelName = 'places'
     const model = {
       /**
       * Nome do local.
@@ -204,13 +204,13 @@ const models = {
       name: modelName
     }
   },
-  eventtype: () => {
+  eventtypes: () => {
     //Model info
-    const collectionName = 'eventtype'
-    const modelName = 'eventtype'
+    const collectionName = 'eventtypes'
+    const modelName = 'eventtypes'
     const model = {
       /**
-      * Nome do eventType.
+      * Nome do eventtype.
       * @type {String}
       */
       name: {
@@ -218,7 +218,7 @@ const models = {
         required: true
       },
       /**
-      * Define se o eventType está ativo.
+      * Define se o eventtype está ativo.
       * @type {Boolean}
       */
       active: {
@@ -226,7 +226,7 @@ const models = {
         default: true
       },
       /**
-      * Data de criação do eventType.
+      * Data de criação do eventtype.
       * @type {Date}
       */
       createAt: {
@@ -234,7 +234,7 @@ const models = {
         default: Date.now
       },
       /**
-      * Data da última vez que os dados do eventType foi atualizado.
+      * Data da última vez que os dados do eventtype foi atualizado.
       * @type {String}
       */
       lastUpdate: {
@@ -259,10 +259,10 @@ const models = {
       name: modelName
     }
   },
-  speaker: () => {
+  speakers: () => {
     //Model info
-    const collectionName = 'speaker'
-    const modelName = 'speaker'
+    const collectionName = 'speakers'
+    const modelName = 'speakers'
     const model = {
       /**
       * Nome do palestrante.

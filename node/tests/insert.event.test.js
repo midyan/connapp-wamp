@@ -19,7 +19,7 @@ const timestamp = dateString + ' ' + hours
 
 const event = {
   name: 'test event inserted',
-  eventType: '59bc2fcd3d63679b77fe6cc7',
+  eventtype: '59bc2fcd3d63679b77fe6cc7',
   local: '59bc2fcd3d63679b77fe6caf',
   speakers: [],
   start: new Date(2017, 8, 10, 12, 30, 0),
