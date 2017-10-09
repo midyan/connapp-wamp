@@ -78,7 +78,7 @@ const models = {
       * Tipo de evento
       * @type {ObjectId}
       */
-      eventtype: {
+      eventType: {
         type: ObjectId,
         ref: 'eventtypes',
         required: true
