@@ -33,7 +33,7 @@ const models = {
     //Model info
     const collectionName = 'events'
     const modelName = 'events'
-    const model =  {
+    const model = {
       /**
       * Nome do evento.
       * @type {String}
@@ -41,6 +41,14 @@ const models = {
       name: {
         type: String,
         required: true
+      },
+      /**
+      * Nome do evento.
+      * @type {String}
+      */
+      description: {
+        type: String,
+        required: false
       },
       /**
       * Data e hora que o evento irá começar.
@@ -210,7 +218,7 @@ const models = {
     const modelName = 'eventtypes'
     const model = {
       /**
-      * Nome do eventtype.
+      * Nome do eventType.
       * @type {String}
       */
       name: {
@@ -218,7 +226,7 @@ const models = {
         required: true
       },
       /**
-      * Define se o eventtype está ativo.
+      * Define se o eventType está ativo.
       * @type {Boolean}
       */
       active: {
@@ -226,7 +234,7 @@ const models = {
         default: true
       },
       /**
-      * Data de criação do eventtype.
+      * Data de criação do eventType.
       * @type {Date}
       */
       createAt: {
@@ -234,7 +242,7 @@ const models = {
         default: Date.now
       },
       /**
-      * Data da última vez que os dados do eventtype foi atualizado.
+      * Data da última vez que os dados do eventType foi atualizado.
       * @type {String}
       */
       lastUpdate: {
